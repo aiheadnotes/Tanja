@@ -8,66 +8,194 @@
     /* General Body Styles */
     body {
       font-family: 'Arial', sans-serif;
-      background: #c381b8;
+      background: linear-gradient(135deg, #c381b8 0%, #9168a6 100%);
       color: #fff;
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    body.dark-mode {
+      background: linear-gradient(135deg, #2c3e50 0%, #1a1a2e 100%);
+    }
+    
+    /* Control bar styles */
+    #control-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 10px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    
+    .control-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 5px 8px;
+      border-radius: 4px;
+    }
+    
+    .control-btn:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    #time-display {
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
     }
 
     /* Chat Container */
     #chat-container {
-      background: #47525e;
+      background: rgba(71, 82, 94, 0.9);
       border-radius: 12px;
-      padding: 20px;
+      padding: 15px;
+      width: 90%;
       max-width: 800px;
-      width: 100%;
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+      box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      margin: 10px;
+      height: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Header Styling */
     #header {
       background: #000000;
-      padding: 15px;
+      padding: 12px 10px;
       border-radius: 12px 12px 0 0;
       text-align: center;
       color: #fff;
-      font-size: 24px;
+      font-size: 18px;
       font-family: 'Courier New', Courier, monospace;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 768px) {
+      #header {
+        font-size: 24px;
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+    }
+
+    #header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #c381b8;
     }
 
     /* Chat Messages Styling */
     .msg {
       margin: 10px 0;
-      padding: 12px;
+      padding: 10px;
       border-radius: 8px;
-      max-width: 70%;
+      max-width: 80%;
+      position: relative;
+      clear: both;
+      word-wrap: break-word;
+      font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .msg {
+        max-width: 70%;
+        padding: 12px;
+        font-size: 16px;
+      }
     }
 
     .user {
       background: #000000;
-      text-align: right;
       color: white;
       border-radius: 10px 10px 0 10px;
+      float: right;
+      margin-left: 20%;
+      box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.1);
     }
 
     .bot {
       background: #ffffff;
-      text-align: left;
       color: rgb(0, 0, 0);
       border-radius: 10px 10px 10px 0;
+      float: left;
+      margin-right: 20%;
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1); 
+    }
+
+    /* Typing indicator */
+    .typing-indicator {
+      background: #ffffff;
+      color: rgb(0, 0, 0);
+      border-radius: 10px 10px 10px 0;
+      float: left;
+      margin-right: 20%;
+      padding: 10px;
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .typing-indicator {
+        margin-right: 30%;
+        padding: 15px;
+      }
+    }
+
+    .typing-indicator span {
+      height: 8px;
+      width: 8px;
+      float: left;
+      margin: 0 1px;
+      background-color: #9E9EA1;
+      display: block;
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+    
+    @media (min-width: 768px) {
+      .typing-indicator span {
+        height: 10px;
+        width: 10px;
+      }
+    }
+
+    /* Input Area */
+    #input-area {
+      display: flex;
+      margin-top: 15px;
+      gap: 5px;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      #input-area {
+        gap: 10px;
+      }
     }
 
     /* Input Field */
     #input {
-      width: 97%;
-      padding: 12px;
-      margin-top: 15px;
-      font-size: 16px;
+      flex-grow: 1;
+      padding: 10px;
+      font-size: 14px;
       background: #000000;
       color: white;
       border: 2px solid #8e7b5c;
@@ -76,7 +204,50 @@
     }
 
     #input:focus {
-      border-color: #000000;
+      border-color: #c381b8;
+      box-shadow: 0 0 8px rgba(195, 129, 184, 0.6);
+    }
+
+    @media (min-width: 768px) {
+      #input {
+        padding: 12px;
+        font-size: 16px;
+      }
+    }
+
+    /* Buttons */
+    .btn {
+      background: #000000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      min-width: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .btn {
+        padding: 12px;
+      }
+    }
+
+    .btn:hover {
+      background: #c381b8;
+    }
+
+    .btn:active {
+      background: #a16d9d;
+    }
+
+    .btn i {
+      font-size: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .btn i {
+        font-size: 18px;
+      }
     }
 
     /* Footer Styling */
@@ -85,15 +256,132 @@
       text-align: center;
       color: #bebbb7;
       margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* Chat Scroll */
     #chat {
-      max-height: 400px;
+      flex: 1;
       overflow-y: auto;
+      padding: 10px 5px;
+      min-height: 200px;
     }
     
+    @media (min-width: 768px) {
+      #chat {
+        padding: 10px;
+      }
+    }
+    
+    /* Theme Toggle */
+    #theme-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 5;
+    }
+    
+    @media (min-width: 768px) {
+      #theme-toggle {
+        font-size: 20px;
+      }
+    }
+    
+    /* Mood Indicator */
+    #mood-indicator {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 16px;
+      z-index: 5;
+    }
+    
+    @media (min-width: 768px) {
+      #mood-indicator {
+        font-size: 24px;
+      }
+    }
+    
+    /* Custom Scrollbar - Only for non-touch devices */
+    @media (hover: hover) {
+      #chat::-webkit-scrollbar {
+        width: 5px;
+      }
+      
+      #chat::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+      
+      #chat::-webkit-scrollbar-thumb {
+        background: #000000;
+        border-radius: 10px;
+      }
+      
+      #chat::-webkit-scrollbar-thumb:hover {
+        background: #c381b8;
+      }
+    }
+
+    /* Clear both after messages */
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    
+    /* Emoji Panel */
+    #emoji-panel {
+      position: absolute;
+      bottom: 70px;
+      right: 10px;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      z-index: 10;
+      width: 200px;
+      max-width: 80vw;
+    }
+    
+    @media (min-width: 768px) {
+      #emoji-panel {
+        grid-template-columns: repeat(7, 1fr);
+        padding: 10px;
+        gap: 5px;
+        right: 20px;
+      }
+    }
+    
+    #emoji-panel span {
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      padding: 3px;
+      border-radius: 4px;
+    }
+    
+    @media (min-width: 768px) {
+      #emoji-panel span {
+        font-size: 20px;
+        padding: 5px;
+      }
+    }
+    
+    #emoji-panel span:hover {
+      background: #f0f0f0;
+    }
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -102,16 +390,49 @@
     <!-- Header Section -->
     <div id="header">
       Tanjas personlige sla.. hjælper
+      <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+      <div id="mood-indicator">😊</div>
+    </div>
+
+    <!-- Controls bar -->
+    <div id="control-bar">
+      <button class="control-btn" id="audio-toggle" title="Mute/Unmute Sound">
+        <i class="fas fa-volume-up"></i>
+      </button>
+      <button class="control-btn" id="effect-toggle" title="Toggle Effects">
+        <i class="fas fa-magic"></i>
+      </button>
+      <div id="time-display">00:00:00</div>
     </div>
 
     <!-- Chat Box -->
-    <div id="chat">
+    <div id="chat" class="clearfix">
       <!-- Initial Bot Message -->
-      <div class="msg bot">Hej Tanja, når Kasper ikke har tid, så kan jeg hjælpe dig. </div>
+      <div class="msg bot">Hej Tanja, når Kasper ikke har tid, så kan jeg hjælpe dig. 🖤</div>
     </div>
 
-    <!-- User Input Field -->
-    <input id="input" type="text" placeholder="Skriv dit prompt her." />
+    <div class="typing-indicator">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- User Input Area -->
+    <div id="input-area">
+      <button class="btn" id="emoji-btn"><i class="far fa-smile"></i></button>
+      <input id="input" type="text" placeholder="Skriv dit prompt her..." />
+      <button class="btn" id="send-btn"><i class="fas fa-paper-plane"></i></button>
+    </div>
+
+    <!-- Emoji Panel -->
+    <div id="emoji-panel">
+      <span>😊</span><span>😂</span><span>❤️</span><span>🖤</span><span>👍</span>
+      <span>😍</span><span>🙏</span><span>😎</span><span>🤔</span>
+      <span>😢</span><span>😘</span><span>🥰</span><span>😉</span>
+      <span>🤣</span><span>👏</span><span>🔥</span><span>💯</span>
+      <span>🙄</span><span>😅</span><span>👀</span><span>🤷</span>
+      <span>💋</span><span>💀</span><span>👻</span><span>🤖</span>
+    </div>
 
     <!-- Footer Text -->
     <div id="footer">
@@ -119,49 +440,297 @@
     </div>
   </div>
 
-  <!-- Puter.js Script -->
-  <script src="https://js.puter.com/v2/"></script>
-
   <script>
+    // Initialize variables
+    let soundEnabled = false; // Default to false for mobile
+    let effectsEnabled = false;
+    const moodEmojis = ['😡', '😔', '😐', '🙂', '😊', '😍'];
+    let isMobile = window.innerWidth < 768;
+    
     // Select elements from the page
     const input = document.getElementById('input');
     const chat = document.getElementById('chat');
+    const sendBtn = document.getElementById('send-btn');
+    const emojiBtn = document.getElementById('emoji-btn');
+    const emojiPanel = document.getElementById('emoji-panel');
+    const themeToggle = document.getElementById('theme-toggle');
+    const typingIndicator = document.querySelector('.typing-indicator');
+    const audioToggle = document.getElementById('audio-toggle');
+    const effectToggle = document.getElementById('effect-toggle');
+    const timeDisplay = document.getElementById('time-display');
+    const moodIndicator = document.getElementById('mood-indicator');
 
-    // Event listener for the Enter key press
-    input.addEventListener('keydown', async (e) => {
-      if (e.key === 'Enter' && input.value.trim()) {
-        const userMsg = input.value; // Get the user's message
-        addMsg('user', userMsg);  // Display user's message
-        input.value = '';  // Clear the input field
+    // Initial setup
+    document.addEventListener('DOMContentLoaded', function() {
+      updateTime();
+      setInterval(updateTime, 1000);
+      
+      // Set initial audio button state
+      audioToggle.innerHTML = soundEnabled ? 
+        '<i class="fas fa-volume-up"></i>' : 
+        '<i class="fas fa-volume-mute"></i>';
+        
+      // Check for system dark mode preference
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+      
+      // Add viewport height fix for mobile browsers
+      setViewportHeight();
+      window.addEventListener('resize', setViewportHeight);
+      
+      // Set focus to input field when page loads
+      setTimeout(() => {
+        input.focus();
+      }, 500);
+    });
+    
+    // Fix for mobile viewport height issues
+    function setViewportHeight() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      isMobile = window.innerWidth < 768;
+      
+      // Adjust chat container height for mobile
+      if (isMobile) {
+        document.getElementById('chat-container').style.height = `calc(var(--vh, 1vh) * 90)`;
+      }
+    }
 
-        // Get bot response using Puter.js
-        const reply = await getBotReply(userMsg);
-        addMsg('bot', reply);  // Display bot's reply
+    // Theme toggle functionality
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      if (document.body.classList.contains('dark-mode')) {
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
       }
     });
+
+    // Emoji panel toggle
+    emojiBtn.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent immediate closing
+      
+      // Close keyboard on mobile when emoji panel opens
+      if (isMobile) {
+        input.blur();
+      }
+      
+      emojiPanel.style.display = emojiPanel.style.display === 'grid' ? 'none' : 'grid';
+      
+      // Close emoji panel when clicking outside
+      if (emojiPanel.style.display === 'grid') {
+        document.addEventListener('click', closeEmojiPanelOnClickOutside);
+      } else {
+        document.removeEventListener('click', closeEmojiPanelOnClickOutside);
+      }
+    });
+    
+    // Function to close emoji panel when clicking outside
+    function closeEmojiPanelOnClickOutside(event) {
+      if (!emojiPanel.contains(event.target) && event.target !== emojiBtn) {
+        emojiPanel.style.display = 'none';
+        document.removeEventListener('click', closeEmojiPanelOnClickOutside);
+      }
+    }
+
+    // Add emojis to input when clicked
+    document.querySelectorAll('#emoji-panel span').forEach(emoji => {
+      emoji.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent bubbling to document
+        input.value += emoji.textContent;
+        
+        if (isMobile) {
+          // On mobile, keep panel open for multiple selections
+        } else {
+          emojiPanel.style.display = 'none';
+          input.focus();
+        }
+      });
+    });
+
+    // Toggle sound
+    audioToggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      audioToggle.innerHTML = soundEnabled ? 
+        '<i class="fas fa-volume-up"></i>' : 
+        '<i class="fas fa-volume-mute"></i>';
+    });
+
+    // Toggle effects
+    effectToggle.addEventListener('click', () => {
+      effectsEnabled = !effectsEnabled;
+      effectToggle.innerHTML = effectsEnabled ? 
+        '<i class="fas fa-magic"></i>' : 
+        '<i class="fas fa-ban"></i>';
+    });
+
+    // Send message function
+    function sendMessage() {
+      if (input.value.trim()) {
+        const userMsg = input.value;
+        addMsg('user', userMsg);
+        input.value = '';
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        // Simple bot response - in a real app this would call an API
+        setTimeout(() => {
+          hideTypingIndicator();
+          // Get a simple response
+          const botReply = getBotReply(userMsg);
+          addMsg('bot', botReply);
+        }, 1000);
+      }
+    }
+
+    // Event listeners for sending messages
+    sendBtn.addEventListener('click', sendMessage);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // Function to show typing indicator
+    function showTypingIndicator() {
+      typingIndicator.style.display = 'block';
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    // Function to hide typing indicator
+    function hideTypingIndicator() {
+      typingIndicator.style.display = 'none';
+    }
 
     // Function to add messages to the chat box
     function addMsg(role, text) {
       const div = document.createElement('div');
-      div.className = 'msg ' + role;  // Assign the class (either 'user' or 'bot')
+      div.className = 'msg ' + role;
 
-      div.innerText = text;  // Set the message text
-      chat.appendChild(div);  // Append the message to the chat
-      chat.scrollTop = chat.scrollHeight;  // Scroll to the bottom of the chat
+      // Create clearfix div to clear floats
+      const clearDiv = document.createElement('div');
+      clearDiv.className = 'clearfix';
+
+      // Process text for black heart emoji
+      text = text.replace(/❤/g, '🖤');
+      
+      div.innerText = text;
+      chat.appendChild(div);
+      chat.appendChild(clearDiv);
+      chat.scrollTop = chat.scrollHeight;
+      
+      // Add sound effect for messages
+      if (soundEnabled) {
+        playMessageSound(role);
+      }
+      
+      // Update mood for bot responses
+      if (role === 'bot') {
+        updateMood(text);
+      }
     }
 
-    // Function to get bot response from Puter.js API
-    async function getBotReply(text) {
-      try {
-        // Call the Puter API with the user message
-        const response = await puter.ai.chat(text, { model: "gpt-4o" });
-        return response || "No reply from the bot, try again!";  // Return the response
-      } catch (error) {
-        console.error("Error fetching reply:", error);
-        return "Error processing your request.";  // Fallback error message
+    // Function to play message sound
+    function playMessageSound(role) {
+      if (!soundEnabled) return;
+      
+      const audio = new Audio();
+      audio.volume = 0.2;
+      
+      if (role === 'user') {
+        audio.src = 'https://cdn.freesound.org/previews/511/511952_4935568-lq.mp3';
+      } else {
+        audio.src = 'https://cdn.freesound.org/previews/511/511953_4935568-lq.mp3';
+      }
+      
+      audio.play().catch(e => console.log('Audio play failed:', e));
+    }
+    
+    // Update time display
+    function updateTime() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      timeDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    
+    // Update mood based on conversation
+    function updateMood(text) {
+      // Simple sentiment analysis
+      const positive = ['glad', 'godt', 'fint', 'dejlig', 'tak', 'hjælpe', '😊', '🙂', '👍', '❤️', '🖤'];
+      const negative = ['forstår ikke', 'ved ikke', 'kan ikke', 'sorry', 'beklager', '😔', '😢', '👎'];
+      
+      let score = 3; // Neutral start (0-5 scale)
+      
+      // Count positive and negative words
+      positive.forEach(word => {
+        if (text.toLowerCase().includes(word)) score++;
+      });
+      
+      negative.forEach(word => {
+        if (text.toLowerCase().includes(word)) score--;
+      });
+      
+      // Clamp score between 0-5
+      score = Math.max(0, Math.min(score, 5));
+      
+      // Update emoji
+      moodIndicator.textContent = moodEmojis[score];
+    }
+    
+    // Toast notification function
+    function showToast(message) {
+      // Create toast element
+      const toast = document.createElement('div');
+      toast.style.position = 'fixed';
+      toast.style.bottom = '20px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%)';
+      toast.style.backgroundColor = 'rgba(0,0,0,0.8)';
+      toast.style.color = 'white';
+      toast.style.padding = '12px 20px';
+      toast.style.borderRadius = '8px';
+      toast.style.zIndex = '1000';
+      toast.style.fontSize = '14px';
+      toast.textContent = message;
+      
+      document.body.appendChild(toast);
+      
+      // Remove after 3 seconds
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.5s';
+        setTimeout(() => toast.remove(), 500);
+      }, 3000);
+    }
+    
+    // Simple bot reply function - in a real app, this would connect to an API
+    function getBotReply(message) {
+      message = message.toLowerCase();
+      
+      if (message.includes('hej') || message.includes('hallo') || message.includes('goddag')) {
+        return 'Hej! Hvordan kan jeg hjælpe dig i dag? 🖤';
+      }
+      else if (message.includes('hvordan går det') || message.includes('hvordan har du det')) {
+        return 'Jeg har det fint, takk! Hvad med dig? 🖤';
+      }
+      else if (message.includes('hjælp') || message.includes('hjelp')) {
+        return 'Jeg er her for at hjælpe dig! Hvad har du brug for? 🖤';
+      }
+      else if (message.includes('tak') || message.includes('takk')) {
+        return 'Det var så lidt! Er der andet jeg kan hjælpe med? 🖤';
+      }
+      else if (message.includes('farvel') || message.includes('bye') || message.includes('ses')) {
+        return 'Farvel! Håber vi snakkes ved igen snart! 🖤';
+      }
+      else {
+        return 'Jeg forstår ikke helt hvad du mener. Kan du uddybe det? 🖤';
       }
     }
   </script>
-
 </body>
 </html>
